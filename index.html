@@ -11,23 +11,23 @@
 </head>
 <body>
     <div class="container">
-        <h1>Calculadora de Upgrade de Planos</h1>
+        <h1>Calculadora | Upgrade de planos</h1>
 
         <section class="input-section">
-            <h2>Dados Atuais do Cliente</h2>
+            <h2>MRR atual do cliente</h2>
             
             <div id="services-container">
                 <div class="service-item">
                     <div class="form-group">
-                        <label for="servico">Serviço:</label>
+                        <label>Serviço:</label>
                         <select class="servico-select">
                             <option value="plano">Plano</option>
                             <option value="aplicativo">Aplicativo</option>
-                            <option value="outro">Outro Serviço</option>
+                            <option value="outro">Outros Serviços</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="periodicidade">Periodicidade:</label>
+                        <label>Periodicidade:</label>
                         <select class="periodicidade-select">
                             <option value="1">Mensal</option>
                             <option value="3">Trimestral</option>
@@ -36,17 +36,23 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="valorAtual">Valor Atual (R$):</label>
+                        <label>Valor Atual (R$):</label>
                         <input type="number" class="valorAtual-input" placeholder="Ex: 600.00" step="0.01">
                     </div>
                 </div>
             </div>
             
             <button id="addServiceBtn" class="secondary-btn">Adicionar Outro Serviço</button>
-            <button id="calcularMrrBtn">Calcular MRR Mensal</button>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <label for="quantidadeBoletos">Quantidade de Boletos:</label>
+                <input type="number" id="quantidadeBoletos" placeholder="Ex: 30" min="0" value="0">
+            </div>
+
+            <button id="calcularMrrBtn">Calcular MRR</button>
 
             <div class="mrr-result" style="display: none;">
-                <h3>Mensalidade Atual (MRR Total): <span id="mrrMensalDisplay">R$ 0,00</span></h3>
+                <h3>MRR atual: <span id="mrrMensalDisplay">R$ 0,00</span></h3>
             </div>
         </section>
 
@@ -55,18 +61,18 @@
             <p>Com base na Mensalidade Atual de <span id="mrrBaseDisplay">R$ 0,00</span></p>
 
             <div class="upgrade-card">
-                <h3>Upgrade para Plano Gestão Integrada</h3>
-                <p>Valor Mínimo de Upgrade: R$ 199,00</p>
-                <p>Piso Mínimo Adicional (se já paga acima): R$ 50,00</p>
+                <h3>Upgrade para plano Gestão Integrada</h3>
+                <p>Valor mínimo de Upgrade: R$ 199,00</p>
+                <p>Valor mínimo Adicional: R$ 50,00</p>
                 <p class="result-value">Valor a Ofertar: <span id="valorOfertarGestao">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em R$: <span id="ganhoRealGestao">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em %: <span id="ganhoPercentualGestao">0.00%</span></p>
             </div>
 
             <div class="upgrade-card">
-                <h3>Upgrade para Plano Ilimitado 2024</h3>
-                <p>Valor Mínimo de Upgrade: R$ 560,00</p>
-                <p>Piso Mínimo Adicional (se já paga acima): R$ 200,00</p>
+                <h3>Upgrade para plano Ilimitado 2024</h3>
+                <p>Valor mínimo de Upgrade: R$ 560,00</p>
+                <p>Valor mínimo Adicional: R$ 200,00</p>
                 <p class="result-value">Valor a Ofertar: <span id="valorOfertarIlimitado">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em R$: <span id="ganhoRealIlimitado">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em %: <span id="ganhoPercentualIlimitado">0.00%</span></p>
