@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const addServiceBtn = document.getElementById('addServiceBtn');
     const calcularMrrBtn = document.getElementById('calcularMrrBtn');
 
+    // Novo elemento para Quantidade de Boletos
+    const quantidadeBoletosInput = document.getElementById('quantidadeBoletos');
+
     const mrrResultDiv = document.querySelector('.mrr-result');
     const mrrMensalDisplay = document.getElementById('mrrMensalDisplay');
     
@@ -54,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         serviceItem.querySelector('.remove-service-btn').addEventListener('click', (event) => {
             event.target.closest('.service-item').remove();
             // Recalcula se houver valores já preenchidos para refletir a remoção
-            calcularMrrBtn.click();
+            calcularMrrBtn.click(); // Dispara o cálculo novamente
         });
     }
 
@@ -66,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.remove-service-btn').forEach(btn => {
             btn.addEventListener('click', (event) => {
                 event.target.closest('.service-item').remove();
-                calcularMrrBtn.click();
+                calcularMrrBtn.click(); // Dispara o cálculo novamente
             });
         });
     }
@@ -77,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Listener para o botão "Calcular MRR Mensal"
     calcularMrrBtn.addEventListener('click', () => {
         let totalMrrMensal = 0;
-        let hasValidInput = false;
+        let hasValidServiceInput = false; // Flag para verificar se há pelo menos um serviço válido
 
         // Seleciona todos os grupos de serviço
         const serviceItems = document.querySelectorAll('.service-item');
@@ -91,16 +94,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!isNaN(valorAtual) && valorAtual > 0) {
                 totalMrrMensal += (valorAtual / periodicidade);
-                hasValidInput = true;
+                hasValidServiceInput = true;
             }
         });
 
-        if (!hasValidInput) {
-            alert('Por favor, insira pelo menos um valor válido e positivo para o serviço.');
+        // NOVO CÁLCULO: Quantidade de Boletos
+        const quantidadeBoletos = parseFloat(quantidadeBoletosInput.value.replace(',', '.'));
+        const valorBoletos = isNaN(quantidadeBoletos) || quantidadeBoletos < 0 ? 0 : quantidadeBoletos * 1.50;
+        totalMrrMensal += valorBoletos; // Adiciona o valor dos boletos ao MRR total
+        
+        // Se não houver serviços válidos e nem boletos válidos
+        if (!hasValidServiceInput && valorBoletos === 0) {
+            alert('Por favor, insira pelo menos um valor válido para um serviço ou para a quantidade de boletos.');
             mrrResultDiv.style.display = 'none';
             resultsSection.style.display = 'none';
             return;
         }
+
 
         // Exibe o MRR Mensal Total
         mrrMensalDisplay.textContent = `R$ ${totalMrrMensal.toFixed(2).replace('.', ',')}`;
