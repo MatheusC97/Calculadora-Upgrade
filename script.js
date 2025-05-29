@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Seleção dos elementos HTML
+    // ... (restante do seu código de seleção de elementos permanece o mesmo) ...
     const servicesContainer = document.getElementById('services-container');
     const addServiceBtn = document.getElementById('addServiceBtn');
     const calcularMrrBtn = document.getElementById('calcularMrrBtn');
 
-    // Novo elemento para Quantidade de Boletos
     const quantidadeBoletosInput = document.getElementById('quantidadeBoletos');
 
     const mrrResultDiv = document.querySelector('.mrr-result');
@@ -13,17 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsSection = document.querySelector('.results-section');
     const mrrBaseDisplay = document.getElementById('mrrBaseDisplay');
 
-    // Elementos para o upgrade Gestão Integrada
     const valorOfertarGestao = document.getElementById('valorOfertarGestao');
     const ganhoRealGestao = document.getElementById('ganhoRealGestao');
     const ganhoPercentualGestao = document.getElementById('ganhoPercentualGestao');
 
-    // Elementos para o upgrade Ilimitado 2024
     const valorOfertarIlimitado = document.getElementById('valorOfertarIlimitado');
     const ganhoRealIlimitado = document.getElementById('ganhoRealIlimitado');
     const ganhoPercentualIlimitado = document.getElementById('ganhoPercentualIlimitado');
 
-    // Função para adicionar uma nova linha de serviço
+    // ... (função addServiceRow() permanece a mesma) ...
     function addServiceRow() {
         const serviceItem = document.createElement('div');
         serviceItem.classList.add('service-item');
@@ -53,36 +50,29 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         servicesContainer.appendChild(serviceItem);
 
-        // Adiciona evento para o botão de remover serviço recém-criado
         serviceItem.querySelector('.remove-service-btn').addEventListener('click', (event) => {
             event.target.closest('.service-item').remove();
-            // Recalcula se houver valores já preenchidos para refletir a remoção
-            calcularMrrBtn.click(); // Dispara o cálculo novamente
+            calcularMrrBtn.click(); 
         });
     }
 
-    // Adiciona um serviço inicial se a página carregar sem nenhum
     if (servicesContainer.children.length === 0) {
         addServiceRow();
     } else {
-        // Se já existir, garante que o botão de remover está configurado
         document.querySelectorAll('.remove-service-btn').forEach(btn => {
             btn.addEventListener('click', (event) => {
                 event.target.closest('.service-item').remove();
-                calcularMrrBtn.click(); // Dispara o cálculo novamente
+                calcularMrrBtn.click();
             });
         });
     }
 
-    // Listener para o botão "Adicionar Outro Serviço"
     addServiceBtn.addEventListener('click', addServiceRow);
 
-    // Listener para o botão "Calcular MRR Mensal"
     calcularMrrBtn.addEventListener('click', () => {
         let totalMrrMensal = 0;
-        let hasValidServiceInput = false; // Flag para verificar se há pelo menos um serviço válido
+        let hasValidServiceInput = false;
 
-        // Seleciona todos os grupos de serviço
         const serviceItems = document.querySelectorAll('.service-item');
 
         serviceItems.forEach(item => {
@@ -98,12 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // NOVO CÁLCULO: Quantidade de Boletos
         const quantidadeBoletos = parseFloat(quantidadeBoletosInput.value.replace(',', '.'));
         const valorBoletos = isNaN(quantidadeBoletos) || quantidadeBoletos < 0 ? 0 : quantidadeBoletos * 1.50;
-        totalMrrMensal += valorBoletos; // Adiciona o valor dos boletos ao MRR total
+        totalMrrMensal += valorBoletos;
         
-        // Se não houver serviços válidos e nem boletos válidos
         if (!hasValidServiceInput && valorBoletos === 0) {
             alert('Por favor, insira pelo menos um valor válido para um serviço ou para a quantidade de boletos.');
             mrrResultDiv.style.display = 'none';
@@ -111,34 +99,40 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-
-        // Exibe o MRR Mensal Total
         mrrMensalDisplay.textContent = `R$ ${totalMrrMensal.toFixed(2).replace('.', ',')}`;
         mrrResultDiv.style.display = 'block';
         mrrBaseDisplay.textContent = `R$ ${totalMrrMensal.toFixed(2).replace('.', ',')}`;
 
-        // --- Cálculo para Gestão Integrada ---
+        // --- CÁLCULO CORRIGIDO para Gestão Integrada ---
         let valorOfertaGI;
-        if (totalMrrMensal <= 199.00) {
+        // A base para o cálculo do piso é o MRR Total
+        const mrrBaseParaPisoGI = totalMrrMensal; 
+
+        if (mrrBaseParaPisoGI <= 199.00) {
             valorOfertaGI = 199.00;
         } else {
-            valorOfertaGI = totalMrrMensal + 50.00;
+            valorOfertaGI = mrrBaseParaPisoGI + 50.00;
         }
-        const ganhoRealGI = valorOfertaGI - totalMrrMensal;
+        // O ganho real é a diferença entre o novo valor ofertado e o MRR Total ATUAL
+        const ganhoRealGI = valorOfertaGI - totalMrrMensal; 
         const ganhoPercentualGI = (ganhoRealGI / totalMrrMensal) * 100;
 
         valorOfertarGestao.textContent = `R$ ${valorOfertaGI.toFixed(2).replace('.', ',')}`;
         ganhoRealGestao.textContent = `R$ ${ganhoRealGI.toFixed(2).replace('.', ',')}`;
         ganhoPercentualGestao.textContent = `${ganhoPercentualGI.toFixed(2).replace('.', ',')}%`;
 
-        // --- Cálculo para Ilimitado 2024 ---
+        // --- CÁLCULO CORRIGIDO para Ilimitado 2024 ---
         let valorOfertaILIMITADO;
-        if (totalMrrMensal <= 560.00) {
+        // A base para o cálculo do piso é o MRR Total
+        const mrrBaseParaPisoILIMITADO = totalMrrMensal; 
+
+        if (mrrBaseParaPisoILIMITADO <= 560.00) {
             valorOfertaILIMITADO = 560.00;
         } else {
-            valorOfertaILIMITADO = totalMrrMensal + 200.00;
+            valorOfertaILIMITADO = mrrBaseParaPisoILIMITADO + 200.00;
         }
-        const ganhoRealILIMITADO = valorOfertaILIMITADO - totalMrrMensal;
+        // O ganho real é a diferença entre o novo valor ofertado e o MRR Total ATUAL
+        const ganhoRealILIMITADO = valorOfertaILIMITADO - totalMrrMensal; 
         const ganhoPercentualILIMITADO = (ganhoRealILIMITADO / totalMrrMensal) * 100;
 
         valorOfertarIlimitado.textContent = `R$ ${valorOfertaILIMITADO.toFixed(2).replace('.', ',')}`;
