@@ -1,0 +1,171 @@
+/* Importação de fonte padrão para começar */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #0E2A3E; /* Cor de fundo da sua empresa */
+    color: #ffffff; /* Cor do texto da sua empresa */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha o conteúdo ao topo */
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ffffff; /* O container principal ficará branco para o conteúdo se destacar */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+    margin-top: 20px; /* Margem superior para afastar do topo da tela */
+    color: #333; /* Cor do texto dentro do container para garantir legibilidade */
+}
+
+h1 {
+    text-align: center;
+    color: #406D87; /* Cor principal da sua empresa para o título principal */
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #406D87; /* Cor principal da sua empresa para os subtítulos */
+    border-bottom: 1px solid #ccc; /* Uma linha mais clara */
+    padding-bottom: 10px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #406D87; /* Cor principal da sua empresa para os títulos menores */
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group select,
+.form-group input[type="number"] {
+    width: calc(100% - 20px); /* Ajuste para padding */
+    padding: 10px;
+    border: 1px solid #99BC29; /* Cor secundária da sua empresa para a borda dos campos */
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Garante que padding não adicione largura */
+    color: #333; /* Cor do texto dentro dos inputs para legibilidade */
+}
+
+button {
+    background-color: #406D87; /* Cor principal da sua empresa para os botões */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #33596D; /* Um tom um pouco mais escuro da cor principal para o hover */
+}
+
+.mrr-result {
+    background-color: #e6ffe6; /* Um verde bem clarinho para destacar o MRR */
+    border-left: 5px solid #99BC29; /* Cor secundária da sua empresa para a linha de destaque */
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333; /* Cor do texto para garantir legibilidade */
+}
+
+.mrr-result h3 {
+    margin: 0;
+    color: #99BC29; /* Cor secundária da sua empresa para o título do MRR */
+}
+
+.upgrade-card {
+    background-color: #f8f9fa; /* Fundo mais claro para os cards de upgrade */
+    border: 1px solid #dee2e6; /* Borda suave */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.upgrade-card h3 {
+    color: #406D87; /* Cor principal da sua empresa para os títulos dos cards */
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.upgrade-card p {
+    margin-bottom: 5px;
+    color: #333; /* Cor do texto padrão para os parágrafos */
+}
+
+.result-value {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #406D87; /* Cor principal para o valor a ofertar */
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.gain-value {
+    font-size: 1rem;
+    color: #99BC29; /* Cor secundária para os valores de ganho */
+    font-weight: bold;
+}
+
+/* Responsividade básica */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+    button {
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
+}
+
+button {
+    background-color: #406D87; /* Cor principal da sua empresa para os botões */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #33596D; /* Um tom um pouco mais escuro da cor principal para o hover */
+}
+
+/* Novo estilo para o botão secundário */
+.secondary-btn {
+    background-color: #99BC29; /* Cor secundária da sua empresa */
+    color: #0E2A3E; /* Cor de fundo para o texto */
+    margin-bottom: 10px; /* Adiciona uma pequena margem abaixo dele */
+}
+
+.secondary-btn:hover {
+    background-color: #7a9c20; /* Um tom um pouco mais escuro da cor secundária para o hover */
+}
+
+/* ... (o resto do seu CSS existente) ... */
