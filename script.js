@@ -1,12 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Seleção dos elementos HTML
+    // Seleção dos elementos HTML (existentes)
     const servicesContainer = document.getElementById('services-container');
     const addServiceBtn = document.getElementById('addServiceBtn');
     const calcularMrrBtn = document.getElementById('calcularMrrBtn');
 
-    const quantidadeBoletosInput = document.getElementById('quantidadeBoletos');
+    // NOVOS ELEMENTOS: Checkbox e Contêineres de Grupos
+    const hasIntegratedAccountCheckbox = document.getElementById('hasIntegratedAccount');
+    const boletosGroup = document.getElementById('boletos-group');
+    const faturasGroup = document.getElementById('faturas-group');
 
-    // NOVOS ELEMENTOS: Faturas
+    // Elementos de input (existentes, mas agora podem estar em grupos escondidos)
+    const quantidadeBoletosInput = document.getElementById('quantidadeBoletos');
     const fatura1Input = document.getElementById('fatura1');
     const fatura2Input = document.getElementById('fatura2');
     const fatura3Input = document.getElementById('fatura3');
@@ -17,12 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsSection = document.querySelector('.results-section');
     const mrrBaseDisplay = document.getElementById('mrrBaseDisplay');
 
-    // Elementos para o upgrade Gestão Integrada
     const valorOfertarGestao = document.getElementById('valorOfertarGestao');
     const ganhoRealGestao = document.getElementById('ganhoRealGestao');
     const ganhoPercentualGestao = document.getElementById('ganhoPercentualGestao');
 
-    // Elementos para o upgrade Ilimitado 2024
     const valorOfertarIlimitado = document.getElementById('valorOfertarIlimitado');
     const ganhoRealIlimitado = document.getElementById('ganhoRealIlimitado');
     const ganhoPercentualIlimitado = document.getElementById('ganhoPercentualIlimitado');
@@ -76,12 +78,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addServiceBtn.addEventListener('click', addServiceRow);
 
+    // Lógica para mostrar/esconder grupos com base no checkbox
+    hasIntegratedAccountCheckbox.addEventListener('change', () => {
+        if (hasIntegratedAccountCheckbox.checked) {
+            // Cliente tem conta integrada: mostrar faturas, esconder boletos
+            faturasGroup.style.display = 'block';
+            boletosGroup.style.display = 'none';
+            // Limpar valor dos boletos para não afetar o cálculo
+            quantidadeBoletosInput.value = '0'; 
+        } else {
+            // Cliente NÃO tem conta integrada: mostrar boletos, esconder faturas
+            faturasGroup.style.display = 'none';
+            boletosGroup.style.display = 'block';
+            // Limpar valores das faturas para não afetar o cálculo
+            fatura1Input.value = '0';
+            fatura2Input.value = '0';
+            fatura3Input.value = '0';
+        }
+        // Disparar o cálculo novamente para atualizar o MRR com base nos campos visíveis/limpos
+        calcularMrrBtn.click();
+    });
+
+    // Função auxiliar para formatar como moeda BRL (já existente)
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(value);
+    };
+
     calcularMrrBtn.addEventListener('click', () => {
         let totalMrrMensal = 0;
-        let hasValidInput = false; // Esta flag agora considera serviços, boletos e faturas
+        let hasValidInput = false;
 
         const serviceItems = document.querySelectorAll('.service-item');
-
         serviceItems.forEach(item => {
             const valorAtualInput = item.querySelector('.valorAtual-input');
             const periodicidadeSelect = item.querySelector('.periodicidade-select');
@@ -95,43 +127,47 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        const quantidadeBoletos = parseFloat(quantidadeBoletosInput.value.replace(',', '.'));
-        const valorBoletos = isNaN(quantidadeBoletos) || quantidadeBoletos < 0 ? 0 : quantidadeBoletos * 1.50;
-        totalMrrMensal += valorBoletos;
-        if (valorBoletos > 0) { // Verifica se há valor de boletos para considerar input válido
-            hasValidInput = true;
+        // CÁLCULO DE BOLETOS (APENAS SE O GRUPO ESTIVER VISÍVEL)
+        if (boletosGroup.style.display === 'block') { // Verifica se o grupo está visível
+            const quantidadeBoletos = parseFloat(quantidadeBoletosInput.value.replace(',', '.'));
+            const valorBoletos = isNaN(quantidadeBoletos) || quantidadeBoletos < 0 ? 0 : quantidadeBoletos * 1.50;
+            totalMrrMensal += valorBoletos;
+            if (valorBoletos > 0) {
+                hasValidInput = true;
+            }
         }
 
-        // NOVO CÁLCULO: Faturas
-        const fatura1 = parseFloat(fatura1Input.value.replace(',', '.'));
-        const fatura2 = parseFloat(fatura2Input.value.replace(',', '.'));
-        const fatura3 = parseFloat(fatura3Input.value.replace(',', '.'));
+        // CÁLCULO DE FATURAS (APENAS SE O GRUPO ESTIVER VISÍVEL)
+        if (faturasGroup.style.display === 'block') { // Verifica se o grupo está visível
+            const fatura1 = parseFloat(fatura1Input.value.replace(',', '.'));
+            const fatura2 = parseFloat(fatura2Input.value.replace(',', '.'));
+            const fatura3 = parseFloat(fatura3Input.value.replace(',', '.'));
 
-        let somaFaturas = 0;
-        let numFaturasValidas = 0;
+            let somaFaturas = 0;
+            let numFaturasValidas = 0;
 
-        if (!isNaN(fatura1) && fatura1 > 0) {
-            somaFaturas += fatura1;
-            numFaturasValidas++;
-        }
-        if (!isNaN(fatura2) && fatura2 > 0) {
-            somaFaturas += fatura2;
-            numFaturasValidas++;
-        }
-        if (!isNaN(fatura3) && fatura3 > 0) {
-            somaFaturas += fatura3;
-            numFaturasValidas++;
+            if (!isNaN(fatura1) && fatura1 > 0) {
+                somaFaturas += fatura1;
+                numFaturasValidas++;
+            }
+            if (!isNaN(fatura2) && fatura2 > 0) {
+                somaFaturas += fatura2;
+                numFaturasValidas++;
+            }
+            if (!isNaN(fatura3) && fatura3 > 0) {
+                somaFaturas += fatura3;
+                numFaturasValidas++;
+            }
+
+            let mediaFaturas = 0;
+            if (numFaturasValidas > 0) {
+                mediaFaturas = somaFaturas / numFaturasValidas;
+                hasValidInput = true;
+            }
+            
+            totalMrrMensal += mediaFaturas;
         }
 
-        let mediaFaturas = 0;
-        if (numFaturasValidas > 0) {
-            mediaFaturas = somaFaturas / numFaturasValidas;
-            hasValidInput = true; // Se há faturas válidas, o input é válido
-        }
-        
-        totalMrrMensal += mediaFaturas; // Adiciona a média das faturas ao MRR total
-
-        // Validação geral final
         if (!hasValidInput) {
             alert('Por favor, insira pelo menos um valor válido para um serviço, quantidade de boletos ou faturas.');
             mrrResultDiv.style.display = 'none';
@@ -139,21 +175,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Formatação para BRL (reutilizando a função auxiliar)
-        const formatCurrency = (value) => {
-            return new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }).format(value);
-        };
-
         mrrMensalDisplay.textContent = formatCurrency(totalMrrMensal);
         mrrResultDiv.style.display = 'block';
         mrrBaseDisplay.textContent = formatCurrency(totalMrrMensal);
 
-        // --- CÁLCULO CORRIGIDO para Gestão Integrada ---
+        // --- CÁLCULO para Gestão Integrada ---
         let valorOfertaGI;
         const mrrBaseParaPisoGI = totalMrrMensal; 
 
@@ -169,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ganhoRealGestao.textContent = formatCurrency(ganhoRealGI);
         ganhoPercentualGestao.textContent = `${ganhoPercentualGI.toFixed(2).replace('.', ',')}%`;
 
-        // --- CÁLCULO CORRIGIDO para Ilimitado 2024 ---
+        // --- CÁLCULO para Ilimitado 2024 ---
         let valorOfertaILIMITADO;
         const mrrBaseParaPisoILIMITADO = totalMrrMensal; 
 
