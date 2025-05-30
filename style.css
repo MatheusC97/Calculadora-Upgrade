@@ -1,4 +1,3 @@
-/* Importação de fonte padrão para começar */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -22,6 +21,19 @@ body {
     color: #333; /* Cor do texto dentro do container para garantir legibilidade */
 }
 
+/* Estilos para o container da logo (se você decidiu manter a logo) */
+.header-logo {
+    text-align: center; /* Centraliza a imagem dentro da div */
+    margin-bottom: 20px; /* Adiciona um espaço abaixo da logo */
+}
+
+/* Estilos para a imagem da logo (se você decidiu manter a logo) */
+.logo {
+    max-width: 150px; /* Define uma largura máxima para a logo */
+    height: auto; /* Garante que a altura se ajuste proporcionalmente */
+    display: block; /* Remove espaços extras se for um elemento inline */
+    margin: 0 auto; /* Centraliza a imagem se não estiver usando text-align no pai */
+}
 
 h1 {
     text-align: center;
@@ -63,6 +75,28 @@ h3 {
     color: #333; /* Cor do texto dentro dos inputs para legibilidade */
 }
 
+/* Estilo para o checkbox (novo) */
+.checkbox-group {
+    display: flex; /* Para alinhar o checkbox com o texto */
+    align-items: center;
+    margin-top: 20px; /* Adiciona um espaço acima do checkbox */
+    margin-bottom: 15px; /* Adiciona um espaço abaixo */
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px; /* Ajuste o tamanho do checkbox */
+    height: 20px;
+    accent-color: #406D87; /* Cor do checkbox quando marcado, usando sua cor principal */
+}
+
+.checkbox-group label {
+    display: inline; /* Para o texto ficar ao lado do checkbox */
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+
 button {
     background-color: #406D87; /* Cor principal da sua empresa para os botões */
     color: white;
@@ -80,7 +114,6 @@ button:hover {
     background-color: #33596D; /* Um tom um pouco mais escuro da cor principal para o hover */
 }
 
-/* Novo estilo para o botão secundário */
 .secondary-btn {
     background-color: #99BC29; /* Cor secundária da sua empresa */
     color: #0E2A3E; /* Cor de fundo para o texto */
@@ -110,7 +143,7 @@ button:hover {
 
 .upgrade-card {
     background-color: #f8f9fa; /* Fundo mais claro para os cards de upgrade */
-    border: 1px solid #dee2e6; /* Borda suave */
+    border: 1px solid #dee2e6;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
