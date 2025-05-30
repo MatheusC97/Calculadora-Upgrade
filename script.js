@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let valorOfertaGI;
         const mrrBaseParaPisoGI = totalMrrMensal; 
 
-        if (mrrBaseParaPisoGI <= 199.00) {
+        if (mrrBaseParaPisoGI <= 150.00) {
             valorOfertaGI = 199.00;
         } else {
             valorOfertaGI = mrrBaseParaPisoGI + 50.00;
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let valorOfertaILIMITADO;
         const mrrBaseParaPisoILIMITADO = totalMrrMensal; 
 
-        if (mrrBaseParaPisoILIMITADO <= 560.00) {
+        if (mrrBaseParaPisoILIMITADO <= 360.00) {
             valorOfertaILIMITADO = 560.00;
         } else {
             valorOfertaILIMITADO = mrrBaseParaPisoILIMITADO + 200.00;
