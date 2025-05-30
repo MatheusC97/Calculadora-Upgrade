@@ -21,13 +21,13 @@ body {
     color: #333; /* Cor do texto dentro do container para garantir legibilidade */
 }
 
-/* Estilos para o container da logo (se você decidiu manter a logo) */
+/* Estilos para o container da logo (se você decidiu manter a logo no HTML) */
 .header-logo {
     text-align: center; /* Centraliza a imagem dentro da div */
     margin-bottom: 20px; /* Adiciona um espaço abaixo da logo */
 }
 
-/* Estilos para a imagem da logo (se você decidiu manter a logo) */
+/* Estilos para a imagem da logo (se você decidiu manter a logo no HTML) */
 .logo {
     max-width: 150px; /* Define uma largura máxima para a logo */
     height: auto; /* Garante que a altura se ajuste proporcionalmente */
@@ -75,25 +75,34 @@ h3 {
     color: #333; /* Cor do texto dentro dos inputs para legibilidade */
 }
 
-/* Estilo para o checkbox (novo) */
-.checkbox-group {
-    display: flex; /* Para alinhar o checkbox com o texto */
+/* Estilo para o grupo de rádio (o novo ajuste) */
+.radio-group {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.radio-group label {
+    font-weight: bold; /* Título "Cliente tem Conta Integrada?" */
+    margin-bottom: 10px; /* Espaço entre o título e as opções */
+}
+
+.radio-group > div { /* Cada opção de rádio (Sim/Não) */
+    display: flex;
     align-items: center;
-    margin-top: 20px; /* Adiciona um espaço acima do checkbox */
-    margin-bottom: 15px; /* Adiciona um espaço abaixo */
+    margin-bottom: 5px; /* Espaço entre "Sim" e "Não" */
 }
 
-.checkbox-group input[type="checkbox"] {
+.radio-group input[type="radio"] {
     margin-right: 10px;
-    width: 20px; /* Ajuste o tamanho do checkbox */
+    width: 20px;
     height: 20px;
-    accent-color: #406D87; /* Cor do checkbox quando marcado, usando sua cor principal */
+    accent-color: #406D87; /* Cor do rádio quando selecionado */
 }
 
-.checkbox-group label {
-    display: inline; /* Para o texto ficar ao lado do checkbox */
+.radio-group div label { /* Labels específicos dos rádios (Sim, Não) */
+    font-weight: normal; /* Sobrescreve o bold do label geral */
+    display: inline-block; /* Para o texto ficar ao lado do rádio */
     margin-bottom: 0;
-    font-weight: normal;
 }
 
 
