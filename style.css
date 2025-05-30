@@ -22,19 +22,6 @@ body {
     color: #333; /* Cor do texto dentro do container para garantir legibilidade */
 }
 
-/* Estilos para o container da logo */
-.header-logo {
-    text-align: center; /* Centraliza a imagem dentro da div */
-    margin-bottom: 20px; /* Adiciona um espaço abaixo da logo */
-}
-
-/* Estilos para a imagem da logo */
-.logo {
-    max-width: 150px; /* Define uma largura máxima para a logo */
-    height: auto; /* Garante que a altura se ajuste proporcionalmente */
-    display: block; /* Remove espaços extras se for um elemento inline */
-    margin: 0 auto; /* Centraliza a imagem se não estiver usando text-align no pai */
-}
 
 h1 {
     text-align: center;
