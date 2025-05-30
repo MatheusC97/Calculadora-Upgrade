@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // A base para o cálculo do piso é o MRR Total
         const mrrBaseParaPisoGI = totalMrrMensal; 
 
-        if (mrrBaseParaPisoGI <= 199.00) {
+        if (mrrBaseParaPisoGI <= 150.00) {
             valorOfertaGI = 199.00;
         } else {
             valorOfertaGI = mrrBaseParaPisoGI + 50.00;
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // A base para o cálculo do piso é o MRR Total
         const mrrBaseParaPisoILIMITADO = totalMrrMensal; 
 
-        if (mrrBaseParaPisoILIMITADO <= 560.00) {
+        if (mrrBaseParaPisoILIMITADO <= 361.00) {
             valorOfertaILIMITADO = 560.00;
         } else {
             valorOfertaILIMITADO = mrrBaseParaPisoILIMITADO + 200.00;
