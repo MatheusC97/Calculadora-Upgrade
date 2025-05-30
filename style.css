@@ -22,6 +22,20 @@ body {
     color: #333; /* Cor do texto dentro do container para garantir legibilidade */
 }
 
+/* Estilos para o container da logo */
+.header-logo {
+    text-align: center; /* Centraliza a imagem dentro da div */
+    margin-bottom: 20px; /* Adiciona um espaço abaixo da logo */
+}
+
+/* Estilos para a imagem da logo */
+.logo {
+    max-width: 150px; /* Define uma largura máxima para a logo */
+    height: auto; /* Garante que a altura se ajuste proporcionalmente */
+    display: block; /* Remove espaços extras se for um elemento inline */
+    margin: 0 auto; /* Centraliza a imagem se não estiver usando text-align no pai */
+}
+
 h1 {
     text-align: center;
     color: #406D87; /* Cor principal da sua empresa para o título principal */
@@ -78,6 +92,18 @@ button {
 button:hover {
     background-color: #33596D; /* Um tom um pouco mais escuro da cor principal para o hover */
 }
+
+/* Novo estilo para o botão secundário */
+.secondary-btn {
+    background-color: #99BC29; /* Cor secundária da sua empresa */
+    color: #0E2A3E; /* Cor de fundo para o texto */
+    margin-bottom: 10px; /* Adiciona uma pequena margem abaixo dele */
+}
+
+.secondary-btn:hover {
+    background-color: #7a9c20; /* Um tom um pouco mais escuro da cor secundária para o hover */
+}
+
 
 .mrr-result {
     background-color: #e6ffe6; /* Um verde bem clarinho para destacar o MRR */
@@ -139,33 +165,3 @@ button:hover {
         font-size: 1rem;
     }
 }
-
-button {
-    background-color: #406D87; /* Cor principal da sua empresa para os botões */
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #33596D; /* Um tom um pouco mais escuro da cor principal para o hover */
-}
-
-/* Novo estilo para o botão secundário */
-.secondary-btn {
-    background-color: #99BC29; /* Cor secundária da sua empresa */
-    color: #0E2A3E; /* Cor de fundo para o texto */
-    margin-bottom: 10px; /* Adiciona uma pequena margem abaixo dele */
-}
-
-.secondary-btn:hover {
-    background-color: #7a9c20; /* Um tom um pouco mais escuro da cor secundária para o hover */
-}
-
-/* ... (o resto do seu CSS existente) ... */
