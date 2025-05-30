@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const addServiceBtn = document.getElementById('addServiceBtn');
     const calcularMrrBtn = document.getElementById('calcularMrrBtn');
 
-    // NOVOS ELEMENTOS: Checkbox e Contêineres de Grupos
-    const hasIntegratedAccountCheckbox = document.getElementById('hasIntegratedAccount');
+    // NOVOS ELEMENTOS: Botões de Rádio e Contêineres de Grupos
+    const integratedAccountRadios = document.querySelectorAll('input[name="integratedAccount"]'); // Seleciona ambos os rádios
     const boletosGroup = document.getElementById('boletos-group');
     const faturasGroup = document.getElementById('faturas-group');
 
@@ -78,15 +78,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addServiceBtn.addEventListener('click', addServiceRow);
 
-    // Lógica para mostrar/esconder grupos com base no checkbox
-    hasIntegratedAccountCheckbox.addEventListener('change', () => {
-        if (hasIntegratedAccountCheckbox.checked) {
+    // Função para controlar a visibilidade dos grupos de boletos/faturas e limpar campos
+    function toggleInputGroups() {
+        const selectedOption = document.querySelector('input[name="integratedAccount"]:checked').value;
+
+        if (selectedOption === 'yes') {
             // Cliente tem conta integrada: mostrar faturas, esconder boletos
             faturasGroup.style.display = 'block';
             boletosGroup.style.display = 'none';
             // Limpar valor dos boletos para não afetar o cálculo
             quantidadeBoletosInput.value = '0'; 
-        } else {
+        } else { // selectedOption === 'no'
             // Cliente NÃO tem conta integrada: mostrar boletos, esconder faturas
             faturasGroup.style.display = 'none';
             boletosGroup.style.display = 'block';
@@ -97,7 +99,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // Disparar o cálculo novamente para atualizar o MRR com base nos campos visíveis/limpos
         calcularMrrBtn.click();
+    }
+
+    // Adiciona listener aos botões de rádio
+    integratedAccountRadios.forEach(radio => {
+        radio.addEventListener('change', toggleInputGroups);
     });
+
+    // Chama a função uma vez ao carregar a página para definir o estado inicial
+    toggleInputGroups(); 
 
     // Função auxiliar para formatar como moeda BRL (já existente)
     const formatCurrency = (value) => {
@@ -183,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let valorOfertaGI;
         const mrrBaseParaPisoGI = totalMrrMensal; 
 
-        if (mrrBaseParaPisoGI <= 150.00) {
+        if (mrrBaseParaPisoGI <= 199.00) {
             valorOfertaGI = 199.00;
         } else {
             valorOfertaGI = mrrBaseParaPisoGI + 50.00;
@@ -199,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let valorOfertaILIMITADO;
         const mrrBaseParaPisoILIMITADO = totalMrrMensal; 
 
-        if (mrrBaseParaPisoILIMITADO <= 360.00) {
+        if (mrrBaseParaPisoILIMITADO <= 560.00) {
             valorOfertaILIMITADO = 560.00;
         } else {
             valorOfertaILIMITADO = mrrBaseParaPisoILIMITADO + 200.00;
