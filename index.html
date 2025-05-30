@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de upgrade</title>
+    <title>Calculadora de Upgrade de Planos</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,10 +11,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>Calculadora de upgrade</h1>
+        <h1>Calculadora de Upgrade de Planos</h1>
 
         <section class="input-section">
-            <h2>Dados atuais do cliente</h2>
+            <h2>Dados Atuais do Cliente</h2>
             
             <div id="services-container">
                 <div class="service-item">
@@ -36,28 +36,27 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Valor atual (R$):</label>
+                        <label>Valor Atual (R$):</label>
                         <input type="number" class="valorAtual-input" placeholder="Ex: 600.00" step="0.01">
                     </div>
                 </div>
             </div>
             
-            <button id="addServiceBtn" class="secondary-btn">Adicionar outro serviço</button>
+            <button id="addServiceBtn" class="secondary-btn">Adicionar Outro Serviço</button>
 
-            <div class="form-group checkbox-group" style="margin-top: 25px;">
-                <input type="checkbox" id="hasIntegratedAccount">
-                <label for="hasIntegratedAccount">Cliente tem Conta Integrada?</label>
-            </div>
-
-            <div id="boletos-group" class="toggle-group" style="display: none;">
-                <div class="form-group">
-                    <label for="quantidadeBoletos">Quantidade de boletos:</label>
-                    <input type="number" id="quantidadeBoletos" placeholder="Ex: 30" min="0" value="0">
+            <div class="form-group radio-group" style="margin-top: 25px;">
+                <label>Cliente tem Conta Integrada?</label>
+                <div>
+                    <input type="radio" id="integratedAccountYes" name="integratedAccount" value="yes" checked>
+                    <label for="integratedAccountYes">Sim</label>
+                </div>
+                <div>
+                    <input type="radio" id="integratedAccountNo" name="integratedAccount" value="no">
+                    <label for="integratedAccountNo">Não</label>
                 </div>
             </div>
 
-            <div id="faturas-group" class="toggle-group" style="display: none;">
-                <div class="form-group">
+            <div id="faturas-group" class="toggle-group"> <div class="form-group">
                     <label for="fatura1">Valor Fatura 1 (R$):</label>
                     <input type="number" id="fatura1" placeholder="Ex: 150.00" step="0.01" value="0">
                 </div>
@@ -71,31 +70,38 @@
                 </div>
             </div>
 
-            <button id="calcularMrrBtn">Calcular MRR mensal</button>
+            <div id="boletos-group" class="toggle-group" style="display: none;">
+                <div class="form-group">
+                    <label for="quantidadeBoletos">Quantidade de Boletos:</label>
+                    <input type="number" id="quantidadeBoletos" placeholder="Ex: 30" min="0" value="0">
+                </div>
+            </div>
+
+            <button id="calcularMrrBtn">Calcular MRR Mensal</button>
 
             <div class="mrr-result" style="display: none;">
-                <h3>Mensalidade atual (MRR Total): <span id="mrrMensalDisplay">R$ 0,00</span></h3>
+                <h3>Mensalidade Atual (MRR Total): <span id="mrrMensalDisplay">R$ 0,00</span></h3>
             </div>
         </section>
 
         <section class="results-section" style="display: none;">
-            <h2>Valores para upgrade</h2>
-            <p>Com base na mensalidade atual de <span id="mrrBaseDisplay">R$ 0,00</span></p>
+            <h2>Valores para Upgrade</h2>
+            <p>Com base na Mensalidade Atual de <span id="mrrBaseDisplay">R$ 0,00</span></p>
 
             <div class="upgrade-card">
-                <h3>Upgrade para plano GESTÃO INTEGRADA</h3>
-                <p>Valor mínimo de upgrade: R$ 199,00</p>
-                <p>Valor mínimo Adicional: R$ 50,00</p>
-                <p class="result-value">Valor a ofertar: <span id="valorOfertarGestao">R$ 0,00</span></p>
+                <h3>Upgrade para Plano Gestão Integrada</h3>
+                <p>Valor Mínimo de Upgrade: R$ 199,00</p>
+                <p>Piso Mínimo Adicional (se já paga acima): R$ 50,00</p>
+                <p class="result-value">Valor a Ofertar: <span id="valorOfertarGestao">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em R$: <span id="ganhoRealGestao">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em %: <span id="ganhoPercentualGestao">0.00%</span></p>
             </div>
 
             <div class="upgrade-card">
-                <h3>Upgrade para plano ILIMITADO 2024</h3>
-                <p>Valor mínimo de upgrade: R$ 560,00</p>
-                <p>Valor mínimo adicional: R$ 200,00</p>
-                <p class="result-value">Valor a ofertar: <span id="valorOfertarIlimitado">R$ 0,00</span></p>
+                <h3>Upgrade para Plano Ilimitado 2024</h3>
+                <p>Valor Mínimo de Upgrade: R$ 560,00</p>
+                <p>Piso Mínimo Adicional (se já paga acima): R$ 200,00</p>
+                <p class="result-value">Valor a Ofertar: <span id="valorOfertarIlimitado">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em R$: <span id="ganhoRealIlimitado">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em %: <span id="ganhoPercentualIlimitado">0.00%</span></p>
             </div>
