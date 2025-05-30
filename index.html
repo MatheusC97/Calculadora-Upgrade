@@ -11,9 +11,6 @@
 </head>
 <body>
     <div class="container">
-        <div class="header-logo">
-            </div>
-
         <h1>Calculadora de upgrade</h1>
 
         <section class="input-section">
@@ -47,23 +44,33 @@
             
             <button id="addServiceBtn" class="secondary-btn">Adicionar outro serviço</button>
 
-            <div class="form-group" style="margin-top: 20px;">
-                <label for="quantidadeBoletos">Quantidade de boletos:</label>
-                <input type="number" id="quantidadeBoletos" placeholder="Ex: 30" min="0" value="0">
+            <div class="form-group checkbox-group" style="margin-top: 25px;">
+                <input type="checkbox" id="hasIntegratedAccount">
+                <label for="hasIntegratedAccount">Cliente tem Conta Integrada?</label>
             </div>
 
-            <div class="form-group">
-                <label for="fatura1">Valor fatura 1 (R$):</label>
-                <input type="number" id="fatura1" placeholder="Ex: 150.00" step="0.01" value="0">
+            <div id="boletos-group" class="toggle-group" style="display: none;">
+                <div class="form-group">
+                    <label for="quantidadeBoletos">Quantidade de boletos:</label>
+                    <input type="number" id="quantidadeBoletos" placeholder="Ex: 30" min="0" value="0">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="fatura2">Valor fatura 2 (R$):</label>
-                <input type="number" id="fatura2" placeholder="Ex: 120.00" step="0.01" value="0">
+
+            <div id="faturas-group" class="toggle-group" style="display: none;">
+                <div class="form-group">
+                    <label for="fatura1">Valor Fatura 1 (R$):</label>
+                    <input type="number" id="fatura1" placeholder="Ex: 150.00" step="0.01" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="fatura2">Valor Fatura 2 (R$):</label>
+                    <input type="number" id="fatura2" placeholder="Ex: 120.00" step="0.01" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="fatura3">Valor Fatura 3 (R$):</label>
+                    <input type="number" id="fatura3" placeholder="Ex: 130.00" step="0.01" value="0">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="fatura3">Valor fatura 3 (R$):</label>
-                <input type="number" id="fatura3" placeholder="Ex: 130.00" step="0.01" value="0">
-            </div>
+
             <button id="calcularMrrBtn">Calcular MRR mensal</button>
 
             <div class="mrr-result" style="display: none;">
@@ -73,22 +80,22 @@
 
         <section class="results-section" style="display: none;">
             <h2>Valores para upgrade</h2>
-            <p>Com base na mensalidade Atual de <span id="mrrBaseDisplay">R$ 0,00</span></p>
+            <p>Com base na mensalidade atual de <span id="mrrBaseDisplay">R$ 0,00</span></p>
 
             <div class="upgrade-card">
                 <h3>Upgrade para plano GESTÃO INTEGRADA</h3>
-                <p>Valor mínimo de Upgrade: R$ 199,00</p>
-                <p>Viso mínimo Adicional: R$ 50,00</p>
-                <p class="result-value">Valor a Ofertar: <span id="valorOfertarGestao">R$ 0,00</span></p>
+                <p>Valor mínimo de upgrade: R$ 199,00</p>
+                <p>Valor mínimo Adicional: R$ 50,00</p>
+                <p class="result-value">Valor a ofertar: <span id="valorOfertarGestao">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em R$: <span id="ganhoRealGestao">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em %: <span id="ganhoPercentualGestao">0.00%</span></p>
             </div>
 
             <div class="upgrade-card">
                 <h3>Upgrade para plano ILIMITADO 2024</h3>
-                <p>Valor Mínimo de upgrade: R$ 560,00</p>
+                <p>Valor mínimo de upgrade: R$ 560,00</p>
                 <p>Valor mínimo adicional: R$ 200,00</p>
-                <p class="result-value">Valor a Ofertar: <span id="valorOfertarIlimitado">R$ 0,00</span></p>
+                <p class="result-value">Valor a ofertar: <span id="valorOfertarIlimitado">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em R$: <span id="ganhoRealIlimitado">R$ 0,00</span></p>
                 <p class="gain-value">Ganho em %: <span id="ganhoPercentualIlimitado">0.00%</span></p>
             </div>
