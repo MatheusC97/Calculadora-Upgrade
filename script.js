@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let valorOfertaGI;
         const mrrBaseParaPisoGI = totalMrrMensal; 
 
-        if (mrrBaseParaPisoGI <= 169.00) {
+        if (mrrBaseParaPisoGI <= 170.00) {
             valorOfertaGI = 250.00;
         } else {
             valorOfertaGI = mrrBaseParaPisoGI + 80.00;
